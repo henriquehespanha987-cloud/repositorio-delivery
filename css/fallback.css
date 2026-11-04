@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css');
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f6f6f6;color:#252525;font:14px/1.5 Inter,Arial,sans-serif}a{color:inherit;text-decoration:none}img{max-width:100%;display:block}figure{margin:0}.container{max-width:670px;margin:0 auto;padding:0 16px}
+header#topo{max-width:710px;margin:0 auto;background:#fff;box-shadow:0 2px 14px #0001}
+header#topo .cover{height:170px;background:#111 center / cover no-repeat;position:relative}
+header#topo .cover .logo{width:96px;height:96px;background:#fff;position:absolute;left:50%;bottom:-42px;transform:translateX(-50%);border-radius:50%;padding:5px;box-shadow:0 2px 12px #0003}
+header#topo .cover .logo figure{width:100%;height:100%;overflow:hidden;border-radius:50%}header#topo .cover .logo img{width:100%;height:100%;object-fit:cover}
+header#topo .cover .borda{position:absolute;bottom:0;left:0;right:0;background:#101010;height:4px}
+header#topo .info{text-align:center;padding:57px 0 22px}.info h1{margin:0 0 14px;font-size:27px;font-weight:900;color:#131313}
+.info .icones{display:flex;justify-content:center;align-items:center;gap:9px;margin:12px 0}.info .icones a{border:1px solid #222;width:32px;height:32px;display:grid;place-items:center;border-radius:50%}
+.info .detalhe{display:flex;justify-content:center;gap:6px;align-items:center;flex-wrap:wrap;font-size:12px;margin:6px 0;color:#555}.info .detalhe b{color:#222}
+.info .aberto{display:flex;justify-content:center;gap:7px;align-items:center;font-size:12px;color:#047d2b;font-weight:800;margin-top:7px}
+#menuCategorias{background:#161616;color:white}#menuCategorias .categorias{display:flex;justify-content:center;align-items:center;gap:20px;padding:14px 0}#menuCategorias a{color:white;font-size:13px;font-weight:700}
+main#lista{max-width:710px;margin:0 auto;background:#f8f9fa;padding:15px 0 24px}.alert{padding:12px;margin-bottom:13px;border:1px solid #dbe3dc;background:#fff;border-radius:8px;text-align:center;font-size:13px}.alert-success{background:#f2fcf3;color:#147a37}
+.categoria{margin-top:20px}.categoria h2{font-size:19px;font-weight:900;color:#171717;margin:0 0 13px}.produtos{display:flex;flex-direction:column;gap:12px}.produtos>.item{border-radius:15px;overflow:hidden;border:1px solid #dedede;background:white;box-shadow:0 2px 7px #0000000b}
+.produtos>.item>a.disponivel{display:flex;align-items:center;justify-content:space-between;gap:15px;min-height:130px;padding:14px;background:white}.produtos>.item>a.disponivel:hover{background:#fbfdfb}
+.produtos .texto{display:flex;flex:1 1 auto;min-width:0;flex-direction:column;align-items:flex-start;gap:4px;font-size:12px;color:#565656}.produtos .texto h3{font-weight:800;line-height:1.35;font-size:15px;color:#292929;margin:0 0 4px}.produtos .texto .precoPromocao{text-decoration:line-through;color:#888}.produtos .texto .preco{font-size:19px;color:#078239;font-weight:900}
+.produtos .fotoProduto{flex:0 0 110px;width:110px;height:110px;border-radius:12px;background:#f0f0f0;overflow:hidden}.produtos .fotoProduto img{width:100%;height:100%;object-fit:cover}
+.produtos .item:has(.avaliacao){padding:10px}.produtos .item:has(.avaliacao) .fotoProduto{width:70px;flex-basis:70px;height:70px}.produtos .avaliacao{flex:1}
+.countdown{display:flex;align-items:center;justify-content:center;gap:10px;margin:8px 0}.countdown .box{padding:6px 12px;border-radius:7px;background:#fff;border:1px solid #ddd}.countdown .box span{font-size:23px;font-weight:900}.countdown .box p{font-size:11px;margin:0}
+#info{display:none;position:fixed;z-index:90;left:50%;top:50%;width:min(94vw,500px);max-height:88vh;overflow:auto;transform:translate(-50%,-50%);padding:22px;background:white;border-radius:14px;box-shadow:0 0 0 100vmax #0009,0 12px 40px #0003}#info:target{display:block}#info h2{font-size:18px}#info h3{font-size:15px}.fechar{cursor:pointer}#opacidade{display:none}
+footer{text-align:center;background:#191919;color:#fff;padding:18px}footer a{color:inherit;text-decoration:underline}
+@media(max-width:540px){body{background:white}header#topo .cover{height:145px}.produtos>.item>a.disponivel{padding:12px;gap:10px}.produtos .fotoProduto{flex-basis:98px;width:98px;height:98px}.produtos .texto h3{font-size:14px}}
