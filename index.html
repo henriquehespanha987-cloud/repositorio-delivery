@@ -28,6 +28,7 @@
   <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -980,6 +981,65 @@
     </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+  <!-- Cidade e estado aproximados por IP. Não solicita localização GPS. -->
+  <script id="prime-localizacao">
+  (() => {
+    "use strict";
+    // O HTML original usa o mesmo ID em diversas áreas. Atualizamos todas.
+    const cityNodes = [...document.querySelectorAll('[id="localCidade"]')];
+    const stateNodes = [...document.querySelectorAll('[id="localEstado"]')];
+    if (!cityNodes.length) return;
+
+    const states = {
+      AC:"Acre",AL:"Alagoas",AP:"Amapá",AM:"Amazonas",BA:"Bahia",
+      CE:"Ceará",DF:"Distrito Federal",ES:"Espírito Santo",GO:"Goiás",
+      MA:"Maranhão",MT:"Mato Grosso",MS:"Mato Grosso do Sul",
+      MG:"Minas Gerais",PA:"Pará",PB:"Paraíba",PR:"Paraná",
+      PE:"Pernambuco",PI:"Piauí",RJ:"Rio de Janeiro",
+      RN:"Rio Grande do Norte",RS:"Rio Grande do Sul",RO:"Rondônia",
+      RR:"Roraima",SC:"Santa Catarina",SP:"São Paulo",SE:"Sergipe",
+      TO:"Tocantins"
+    };
+
+    function show(city, region) {
+      if (!city || typeof city !== "string") return false;
+      const cleanCity = city.trim();
+      const rawRegion = typeof region === "string" ? region.trim() : "";
+      if (!cleanCity) return false;
+      const cleanRegion = states[rawRegion.toUpperCase()] || rawRegion;
+      cityNodes.forEach(el => { el.textContent = cleanCity; });
+      stateNodes.forEach(el => { el.textContent = cleanRegion; });
+      return true;
+    }
+    function queryWithTimeout(url) {
+      const controller = new AbortController();
+      const cancel = setTimeout(() => controller.abort(), 4500);
+      return fetch(url, { signal: controller.signal, cache: "no-store" })
+        .then(response => {
+          if (!response.ok) throw new Error("Serviço indisponível");
+          return response.json();
+        })
+        .finally(() => clearTimeout(cancel));
+    }
+    async function locate() {
+      try {
+        const data = await queryWithTimeout("https://ipwho.is/");
+        if (data?.success && show(data.city, data.region || data.region_code)) return;
+      } catch (_) {}
+      try {
+        const data = await queryWithTimeout("https://ipapi.co/json/");
+        if (!data?.error && show(data.city, data.region || data.region_code)) return;
+      } catch (_) {}
+      // A consulta é aproximada e pode falhar (VPN, bloqueador, limite da API).
+      // Não afirmamos uma cidade sem confirmação.
+      cityNodes.forEach(el => { el.textContent = "sua região"; });
+      stateNodes.forEach(el => { el.textContent = "Brasil"; });
+    }
+    locate();
+  })();
+  </script>
+
 </body>
 
 </html>
